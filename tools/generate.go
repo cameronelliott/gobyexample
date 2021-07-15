@@ -4,10 +4,6 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"fmt"
-	"github.com/alecthomas/chroma"
-	"github.com/alecthomas/chroma/formatters/html"
-	"github.com/alecthomas/chroma/lexers"
-	"github.com/alecthomas/chroma/styles"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -16,6 +12,11 @@ import (
 	"regexp"
 	"strings"
 	"text/template"
+
+	"github.com/alecthomas/chroma"
+	"github.com/alecthomas/chroma/formatters/html"
+	"github.com/alecthomas/chroma/lexers"
+	"github.com/alecthomas/chroma/styles"
 
 	"github.com/russross/blackfriday/v2"
 )
@@ -97,6 +98,10 @@ func mustGlob(glob string) []string {
 func whichLexer(path string) string {
 	if strings.HasSuffix(path, ".go") {
 		return "go"
+	} else if strings.HasSuffix(path, ".html") {
+		return "html"
+	} else if strings.HasSuffix(path, ".js") {
+		return "js"
 	} else if strings.HasSuffix(path, ".sh") {
 		return "console"
 	}
