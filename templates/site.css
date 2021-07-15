@@ -139,7 +139,7 @@ pre, code {
 img.copy, img.run {
   height: 16px;
   width: 16px;
-  float: right
+  float: left
 }
 img.copy, img.run {
   cursor: pointer;
