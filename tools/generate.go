@@ -203,7 +203,8 @@ func parseSegs(sourcePath string) ([]*Seg, string) {
 	for i, seg := range segs {
 		seg.CodeEmpty = (seg.Code == "")
 		seg.CodeLeading = (i < (len(segs) - 1))
-		seg.CodeRun = strings.Contains(seg.Code, "package main")
+		//old seg.CodeRun = strings.Contains(seg.Code, "package main")
+		seg.CodeRun = i == 0 && strings.HasSuffix(sourcePath, ".js")
 	}
 	return segs, filecontent
 }
@@ -245,7 +246,7 @@ func parseAndRenderSegs(sourcePath string) ([]*Seg, string) {
 			seg.CodeRendered = chromaFormat(seg.Code, sourcePath)
 
 			// adding the content to the js code for copying to the clipboard
-			if strings.HasSuffix(sourcePath, ".go") {
+			if strings.HasSuffix(sourcePath, ".js") {
 				seg.CodeForJs = strings.Trim(seg.Code, "\n") + "\n"
 			}
 		}
